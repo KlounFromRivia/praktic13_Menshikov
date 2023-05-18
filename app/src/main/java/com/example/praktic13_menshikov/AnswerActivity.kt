@@ -10,23 +10,25 @@ import com.example.praktic13_menshikov.databinding.ActivityAnswerBinding
 
 class AnswerActivity : AppCompatActivity() {
     lateinit var binding: ActivityAnswerBinding
-    val listRadioName:ArrayList<String> = arrayListOf<String>("radioOne", "radioTwo","radioThree","radioFour","radioFive",
-        "radioSix", "radioSeven","radioEight","radioNine","radioTen")
-    var ListAnswer: ArrayList<String>? = null
+    val listRadioName:ArrayList<String> = arrayListOf<String>("rbtn1", "rbtn2","rbtn3","rbtn4","rbtn5",
+        "rbtn6", "rbtn7","rbtn8","rbtn9","rbtn10")
+    var lstAnswer: ArrayList<String>? = null
     lateinit var intentResult: Intent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnswerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnProv.isEnabled = false
-        ListAnswer = intent.getStringArrayListExtra("lstAnswer")
+
+        lstAnswer = intent.getStringArrayListExtra("lstAnswer")
         intentResult = Intent(this, MainActivity::class.java)
+
         val rg = RadioGroup(this)
         rg.orientation = RadioGroup.VERTICAL
-        for(i in ListAnswer!!.indices){
+        for(i in lstAnswer!!.indices){
             var rb = RadioButton(this)
             rb.id = View.generateViewId()
-            rb.text = ListAnswer?.get(i)
+            rb.text = lstAnswer?.get(i)
             rb.textSize = 28f
             rb.setOnClickListener{
                 intentResult.putExtra("Result", rb.text);

@@ -1,4 +1,4 @@
-package com.example.praktic13_menshikov
+﻿package com.example.praktic13_menshikov
 
 import android.content.Intent
 import android.os.Build
@@ -14,7 +14,6 @@ import com.example.praktic13_menshikov.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var Riddle: RiddlesAnswer
-    private fun Random():Int = (0..14).random()
 
     private var launcher: ActivityResultLauncher<Intent>? = null
 
@@ -32,12 +31,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        Riddle = RiddlesAnswer()
         setContentView(binding.root)
 
         maxCount = binding.txtAnswerCountMax.text.toString().toInt()
-
-        Riddle = RiddlesAnswer()
-        lateinit var txtAnswer: String
 
         binding.btnZagadka.isEnabled = true
         binding.btnOtvet.isEnabled = false
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 if(result.resultCode == RESULT_OK){
                     var text = result.data?.getStringExtra("Result")
                     binding.txtAnswer.text = text
-                    if(txtAnswer == text){
+                    if(answerTXT == text){
                         binding.txtAnswer.setBackgroundColor(resources.getColor(R.color.green))
                         trueCount++
                     }else{
@@ -136,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         var answerList:ArrayList<String> = arrayListOf();
         answerList.addAll(list)
         var intent = Intent(this,AnswerActivity::class.java)
-        intent.putStringArrayListExtra("ListAnswer", answerList)
+        intent.putStringArrayListExtra("lstAnswer", answerList)
         launcher?.launch(intent)
     }
     fun btnRestore(view: View){
@@ -162,5 +159,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnExit.isVisible = true
         binding.btnRestore.isVisible = true
+        staticBTN()
     }
 }
